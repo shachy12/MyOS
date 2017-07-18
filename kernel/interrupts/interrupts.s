@@ -1,12 +1,17 @@
 .global svcall_interrupt
 svcall_interrupt:
+    msr CPSR_c, #0xDF /* System mode */
     push {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}
-    ldr r0, print_svc_address
-    blx r0
-    pop {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}
-    bx lr
+    mov ip, sp
 
-print_svc_address: .word print_svc
+    msr CPSR_c, #0xD3 /* Supervisor mode */
+    pop {r0}
+    add r0, r0, #0x8
+    stmfd r0!, {ip, lr}
+    pop {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}
+    msr SPSR, #0x13
+    mov r0, #0 /* Indicate syscall */
+    bx lr
 
 .global timer_interrupt
 timer_interrupt:
@@ -23,6 +28,7 @@ timer_interrupt:
     add r0, r0, #0x8
     stmfd r0!, {ip, lr}
     pop {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}
+    mov r0, #1 /* Indicate timer */
     msr SPSR, #0x13
     bx lr
 

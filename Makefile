@@ -5,7 +5,7 @@ PLATFORM = qemu-arm
 CFLAGS = -O0 \
 	 -nostartfiles -T platform/$(PLATFORM)/memory_layout.ld \
 	 -fno-builtin -Iplatform/$(PLATFORM) -I. \
-	 -ansi -pedantic -Wall -Wextra -march=armv6 -msoft-float -fPIC -mapcs-frame -marm
+	 -std=c11 -pedantic -Wall -Wextra -march=armv6 -msoft-float -fPIC -mapcs-frame -marm
 
 
 OUTPUT_DIR = build

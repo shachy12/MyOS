@@ -35,3 +35,13 @@ void clear_timer()
 {
     *(TIMER0 + TIMER_INTCLR) = 1; /* Clear interrupt */
 }
+
+void enable_timer()
+{
+    *(INTERRUPT_CONTROLLER + VIC_INTENABLE) = TIMER_INTERRUPT_ENABLE;
+}
+
+void disable_timer()
+{
+    *(INTERRUPT_CONTROLLER + VIC_INTENABLE) &= ~TIMER_INTERRUPT_ENABLE;
+}
