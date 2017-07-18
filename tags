@@ -49,7 +49,9 @@ TIMER_INT_ENABLE	platform/qemu-arm/init.c	12;"	d	file:
 TIMER_PERIODIC	./platform/qemu-arm/init.c	11;"	d	file:
 TIMER_PERIODIC	platform/qemu-arm/init.c	11;"	d	file:
 UART0DR	./kernel/drivers/uart/qemu-arm/uart.c	/^volatile unsigned int * const UART0DR = (unsigned int *)0x101f1000;$/;"	v
+UART0DR	kernel/drivers/uart/qemu-arm/uart.c	/^volatile unsigned int * const UART0DR = (unsigned int *)0x101f1000;$/;"	v
 UART0TFR	./kernel/drivers/uart/qemu-arm/uart.c	/^volatile unsigned int * const UART0TFR = (unsigned int *)0x101f1018;$/;"	v
+UART0TFR	kernel/drivers/uart/qemu-arm/uart.c	/^volatile unsigned int * const UART0TFR = (unsigned int *)0x101f1018;$/;"	v
 VECTOR_TABLE_H	./kernel/interrupts/vector_table.h	2;"	d
 VIC_INTENABLE	./platform/qemu-arm/init.c	16;"	d	file:
 VIC_INTENABLE	platform/qemu-arm/init.c	16;"	d	file:
@@ -99,8 +101,11 @@ timer_interrupt	./kernel/interrupts/interrupts.s	/^timer_interrupt:$/;"	l
 timer_interrupt	kernel/interrupts/interrupts.s	/^timer_interrupt:$/;"	l
 timer_interrupt_address	kernel/interrupts/vector_table.s	/^timer_interrupt_address: .word timer_interrupt$/;"	l
 uart_getc	./kernel/drivers/uart/qemu-arm/uart.c	/^uint8_t uart_getc()$/;"	f
+uart_getc	kernel/drivers/uart/qemu-arm/uart.c	/^uint8_t uart_getc()$/;"	f
 uart_print	./kernel/drivers/uart/qemu-arm/uart.c	/^void uart_print(const char *s)$/;"	f
+uart_print	kernel/drivers/uart/qemu-arm/uart.c	/^void uart_print(const char *s)$/;"	f
 uart_putc	./kernel/drivers/uart/qemu-arm/uart.c	/^void uart_putc(const char c)$/;"	f
+uart_putc	kernel/drivers/uart/qemu-arm/uart.c	/^void uart_putc(const char c)$/;"	f
 user_space1	kernel/main.c	/^void user_space1(void)$/;"	f
 user_space2	kernel/main.c	/^void user_space2(void)$/;"	f
 vector_table_end	kernel/interrupts/vector_table.s	/^vector_table_end:$/;"	l

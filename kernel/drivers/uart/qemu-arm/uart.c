@@ -7,7 +7,7 @@ volatile unsigned int * const UART0TFR = (unsigned int *)0x101f1018;
 void uart_putc(const char c)
 {
     /* Wait until fifo not full */
-    while (*UART0TFR & 0x40);
+    while (*UART0TFR & 0x20);
     *UART0DR = (unsigned int)(c); /* Transmit char */
 }
 
