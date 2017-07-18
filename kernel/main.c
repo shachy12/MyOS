@@ -10,10 +10,17 @@ void print_svc(void)
 }
 
 
-void user_space(void)
+void user_space2(void)
 {
     while (true) {
-        uart_print("user space!\n");
+        uart_print("user space 2!\n");
+    }
+}
+
+void user_space1(void)
+{
+    while (true) {
+        uart_print("user space 1!\n");
     }
 }
 
@@ -44,25 +51,26 @@ struct context_s {
 
 void init_process(struct process_data_t *proc_data, void (*proc_main)(void))
 {
-    proc_data->sp = proc_data->stack + sizeof(proc_data->stack) - 0x200;
+    proc_data->sp = proc_data->stack + sizeof(proc_data->stack) - sizeof(struct context_s) - 4;
     proc_data->pc = proc_main;
 }
 
 void kmain()
 {
-    struct process_data_t user_space_proc;
+    uint8_t pid = 0;
+    struct process_data_t user_space_proc[2];
 
-    init_process(&user_space_proc, &user_space);
-
-    uart_getc();
     uart_print("Booting system\n");
     init_platform();
+
+    init_process(&user_space_proc[0], &user_space1);
+    init_process(&user_space_proc[1], &user_space2);
     /* syscall(); */
     /* uart_print("After SVC!\n"); */
-    dispatch_process(&user_space_proc);
     while (true) {
-        uart_print("timer!\n");
-        clear_timer();
-        dispatch_process(&user_space_proc);
+        for (pid = 0; pid < 2; pid++) {
+            clear_timer();
+            dispatch_process(&user_space_proc[pid]);
+        }
     }
 }

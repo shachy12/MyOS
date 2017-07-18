@@ -88,7 +88,7 @@ reserved_interrupt_address	kernel/interrupts/vector_table.s	/^reserved_interrupt
 reset_interrupt	./kernel/boot.s	/^reset_interrupt:$/;"	l
 reset_interrupt_address	kernel/interrupts/vector_table.s	/^reset_interrupt_address: .word reset_interrupt$/;"	l
 set_timer	./platform/qemu-arm/init.c	/^void set_timer(uint32_t millis)$/;"	f
-set_timer	platform/qemu-arm/init.c	/^void set_timer()$/;"	f
+set_timer	platform/qemu-arm/init.c	/^void set_timer(uint32_t millis)$/;"	f
 sp	kernel/main.c	/^    void *sp;$/;"	m	struct:process_data_t	file:
 stack	kernel/main.c	/^    uint8_t stack[0x10000];$/;"	m	struct:process_data_t	file:
 svcall_interrupt	./kernel/interrupts/interrupts.s	/^svcall_interrupt:$/;"	l
@@ -101,6 +101,7 @@ timer_interrupt_address	kernel/interrupts/vector_table.s	/^timer_interrupt_addre
 uart_getc	./kernel/drivers/uart/qemu-arm/uart.c	/^uint8_t uart_getc()$/;"	f
 uart_print	./kernel/drivers/uart/qemu-arm/uart.c	/^void uart_print(const char *s)$/;"	f
 uart_putc	./kernel/drivers/uart/qemu-arm/uart.c	/^void uart_putc(const char c)$/;"	f
-user_space	kernel/main.c	/^void user_space(void)$/;"	f
+user_space1	kernel/main.c	/^void user_space1(void)$/;"	f
+user_space2	kernel/main.c	/^void user_space2(void)$/;"	f
 vector_table_end	kernel/interrupts/vector_table.s	/^vector_table_end:$/;"	l
 vector_table_start	kernel/interrupts/vector_table.s	/^vector_table_start:$/;"	l

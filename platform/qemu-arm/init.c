@@ -21,13 +21,13 @@ void init_platform()
     memcpy(INTERRUPTS_VECTOR_ADDRESS,
            &vector_table_start,
            (uint32_t)(&vector_table_end) - (uint32_t)(&vector_table_start));
-    set_timer(); /* 1 second timer */
+    set_timer(10); /*  Context switch every 10ms */
 }
 
-void set_timer()
+void set_timer(uint32_t millis)
 {
     *(INTERRUPT_CONTROLLER + VIC_INTENABLE) = TIMER_INTERRUPT_ENABLE;
-    *(TIMER0) = 1000000;
+    *(TIMER0) = TIMER_CLOCK_SPEED / 1000 * millis;
     *(TIMER0 + TIMER_CONTROL_OFFSET) = TIMER_ENABLE | TIMER_PERIODIC | TIMER_INT_ENABLE | TIMER_32_BIT_SIZE;
 }
 
