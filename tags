@@ -1,0 +1,106 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CC	./Makefile	/^CC := $(CROSS_COMPILE)gcc$/;"	m
+CC	Makefile	/^CC := $(CROSS_COMPILE)gcc$/;"	m
+CFLAGS	./Makefile	/^CFLAGS = -O0 \\$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -O0 \\$/;"	m
+CROSS_COMPILE	./Makefile	/^CROSS_COMPILE ?= arm-none-eabi-$/;"	m
+CROSS_COMPILE	Makefile	/^CROSS_COMPILE ?= arm-none-eabi-$/;"	m
+DRIVERS_UART_H	./kernel/drivers/uart/uart.h	2;"	d
+FILES	./Makefile	/^FILES = $(shell find . -type f -iname "*.[cs]")$/;"	m
+FILES	Makefile	/^FILES = $(shell find . -type f -iname "*.[cs]")$/;"	m
+INTERRUPTS_VECTOR_ADDRESS	./platform/qemu-arm/init.c	6;"	d	file:
+INTERRUPTS_VECTOR_ADDRESS	platform/qemu-arm/init.c	6;"	d	file:
+INTERRUPT_CONTROLLER	./platform/qemu-arm/init.c	14;"	d	file:
+INTERRUPT_CONTROLLER	platform/qemu-arm/init.c	14;"	d	file:
+INTERRUPT_HANDLER	./kernel/interrupts/vector_table.c	3;"	d	file:
+INTERRUPT_HANDLER	./kernel/interrupts/vector_table.c	5;"	d	file:
+INTERRUPT_HANDLER	./kernel/interrupts/vector_table.c	6;"	d	file:
+INTERRUPT_HANDLER	./kernel/interrupts/vector_table.c	8;"	d	file:
+OUTPUT_DIR	./Makefile	/^OUTPUT_DIR = build$/;"	m
+OUTPUT_DIR	Makefile	/^OUTPUT_DIR = build$/;"	m
+PLATFORM	./Makefile	/^PLATFORM = qemu-arm$/;"	m
+PLATFORM	Makefile	/^PLATFORM = qemu-arm$/;"	m
+PLATFORMS_H	./platform/platforms.h	2;"	d
+PLATFORMS_H	platform/platforms.h	2;"	d
+QEMU_AUDIO_DRV	./Makefile	/^	QEMU_AUDIO_DRV=none qemu-system-arm -s -M versatilepb -cpu arm1176 -serial mon:stdio -append 'console=ttyS0' -nographic -kernel $(TARGET)$/;"	m
+QEMU_AUDIO_DRV	Makefile	/^	QEMU_AUDIO_DRV=none qemu-system-arm -s -M versatilepb -cpu arm1176 -serial mon:stdio -append 'console=ttyS0' -nographic -kernel $(TARGET)$/;"	m
+TARGET	./Makefile	/^TARGET = $(OUTPUT_DIR)\/os.bin$/;"	m
+TARGET	Makefile	/^TARGET = $(OUTPUT_DIR)\/os.bin$/;"	m
+TIMER0	./platform/qemu-arm/init.c	7;"	d	file:
+TIMER0	platform/qemu-arm/init.c	7;"	d	file:
+TIMER_32_BIT_SIZE	./platform/qemu-arm/init.c	13;"	d	file:
+TIMER_32_BIT_SIZE	platform/qemu-arm/init.c	13;"	d	file:
+TIMER_CLOCK_SPEED	./platform/qemu-arm/init.c	9;"	d	file:
+TIMER_CLOCK_SPEED	platform/qemu-arm/init.c	9;"	d	file:
+TIMER_CONTROL_OFFSET	./platform/qemu-arm/init.c	8;"	d	file:
+TIMER_CONTROL_OFFSET	platform/qemu-arm/init.c	8;"	d	file:
+TIMER_ENABLE	./platform/qemu-arm/init.c	10;"	d	file:
+TIMER_ENABLE	platform/qemu-arm/init.c	10;"	d	file:
+TIMER_INTCLR	platform/qemu-arm/init.c	17;"	d	file:
+TIMER_INTERRUPT_ENABLE	./platform/qemu-arm/init.c	15;"	d	file:
+TIMER_INTERRUPT_ENABLE	platform/qemu-arm/init.c	15;"	d	file:
+TIMER_INT_ENABLE	./platform/qemu-arm/init.c	12;"	d	file:
+TIMER_INT_ENABLE	platform/qemu-arm/init.c	12;"	d	file:
+TIMER_PERIODIC	./platform/qemu-arm/init.c	11;"	d	file:
+TIMER_PERIODIC	platform/qemu-arm/init.c	11;"	d	file:
+UART0DR	./kernel/drivers/uart/qemu-arm/uart.c	/^volatile unsigned int * const UART0DR = (unsigned int *)0x101f1000;$/;"	v
+UART0TFR	./kernel/drivers/uart/qemu-arm/uart.c	/^volatile unsigned int * const UART0TFR = (unsigned int *)0x101f1018;$/;"	v
+VECTOR_TABLE_H	./kernel/interrupts/vector_table.h	2;"	d
+VIC_INTENABLE	./platform/qemu-arm/init.c	16;"	d	file:
+VIC_INTENABLE	platform/qemu-arm/init.c	16;"	d	file:
+clear_timer	platform/qemu-arm/init.c	/^void clear_timer()$/;"	f
+context_s	kernel/main.c	/^struct context_s {$/;"	s	file:
+dispatch_process	kernel/interrupts/interrupts.s	/^dispatch_process:$/;"	l
+init_platform	./platform/qemu-arm/init.c	/^void init_platform()$/;"	f
+init_platform	platform/qemu-arm/init.c	/^void init_platform()$/;"	f
+init_process	kernel/main.c	/^void init_process(struct process_data_t *proc_data, void (*proc_main)(void))$/;"	f
+kmain	./kernel/main.c	/^void kmain()$/;"	f
+kmain	kernel/main.c	/^void kmain()$/;"	f
+lr	kernel/main.c	/^    void (*lr)(void);$/;"	m	struct:context_s	file:
+pc	kernel/main.c	/^    void (*pc)(void);$/;"	m	struct:process_data_t	file:
+print_svc	./kernel/main.c	/^void print_svc(void)$/;"	f
+print_svc	kernel/main.c	/^void print_svc(void)$/;"	f
+print_svc_address	./kernel/interrupts/interrupts.s	/^print_svc_address: .word print_svc$/;"	l
+print_svc_address	kernel/interrupts/interrupts.s	/^print_svc_address: .word print_svc$/;"	l
+print_timer	./kernel/main.c	/^void print_timer(void)$/;"	f
+print_timer_address	./kernel/interrupts/interrupts.s	/^print_timer_address: .word print_timer$/;"	l
+process_data_t	kernel/main.c	/^struct process_data_t {$/;"	s	file:
+r0	kernel/main.c	/^    uint32_t r0;$/;"	m	struct:context_s	file:
+r1	kernel/main.c	/^    uint32_t r1;$/;"	m	struct:context_s	file:
+r10	kernel/main.c	/^    uint32_t r10;$/;"	m	struct:context_s	file:
+r11	kernel/main.c	/^    uint32_t r11;$/;"	m	struct:context_s	file:
+r2	kernel/main.c	/^    uint32_t r2;$/;"	m	struct:context_s	file:
+r3	kernel/main.c	/^    uint32_t r3;$/;"	m	struct:context_s	file:
+r4	kernel/main.c	/^    uint32_t r4;$/;"	m	struct:context_s	file:
+r5	kernel/main.c	/^    uint32_t r5;$/;"	m	struct:context_s	file:
+r6	kernel/main.c	/^    uint32_t r6;$/;"	m	struct:context_s	file:
+r7	kernel/main.c	/^    uint32_t r7;$/;"	m	struct:context_s	file:
+r8	kernel/main.c	/^    uint32_t r8;$/;"	m	struct:context_s	file:
+r9	kernel/main.c	/^    uint32_t r9;$/;"	m	struct:context_s	file:
+reserved_interrupt	./kernel/interrupts/interrupts.s	/^reserved_interrupt:$/;"	l
+reserved_interrupt	kernel/interrupts/interrupts.s	/^reserved_interrupt:$/;"	l
+reserved_interrupt_address	kernel/interrupts/vector_table.s	/^reserved_interrupt_address: .word reserved_interrupt$/;"	l
+reset_interrupt	./kernel/boot.s	/^reset_interrupt:$/;"	l
+reset_interrupt_address	kernel/interrupts/vector_table.s	/^reset_interrupt_address: .word reset_interrupt$/;"	l
+set_timer	./platform/qemu-arm/init.c	/^void set_timer(uint32_t millis)$/;"	f
+set_timer	platform/qemu-arm/init.c	/^void set_timer()$/;"	f
+sp	kernel/main.c	/^    void *sp;$/;"	m	struct:process_data_t	file:
+stack	kernel/main.c	/^    uint8_t stack[0x10000];$/;"	m	struct:process_data_t	file:
+svcall_interrupt	./kernel/interrupts/interrupts.s	/^svcall_interrupt:$/;"	l
+svcall_interrupt	kernel/interrupts/interrupts.s	/^svcall_interrupt:$/;"	l
+svcall_interrupt_address	kernel/interrupts/vector_table.s	/^svcall_interrupt_address: .word svcall_interrupt$/;"	l
+syscall	kernel/syscall.s	/^syscall:$/;"	l
+timer_interrupt	./kernel/interrupts/interrupts.s	/^timer_interrupt:$/;"	l
+timer_interrupt	kernel/interrupts/interrupts.s	/^timer_interrupt:$/;"	l
+timer_interrupt_address	kernel/interrupts/vector_table.s	/^timer_interrupt_address: .word timer_interrupt$/;"	l
+uart_getc	./kernel/drivers/uart/qemu-arm/uart.c	/^uint8_t uart_getc()$/;"	f
+uart_print	./kernel/drivers/uart/qemu-arm/uart.c	/^void uart_print(const char *s)$/;"	f
+uart_putc	./kernel/drivers/uart/qemu-arm/uart.c	/^void uart_putc(const char c)$/;"	f
+user_space	kernel/main.c	/^void user_space(void)$/;"	f
+vector_table_end	kernel/interrupts/vector_table.s	/^vector_table_end:$/;"	l
+vector_table_start	kernel/interrupts/vector_table.s	/^vector_table_start:$/;"	l
