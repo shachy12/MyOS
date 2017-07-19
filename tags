@@ -39,6 +39,7 @@ SYSCALL	kernel/syscalls/kernel_space.c	13;"	d	file:
 SYSCALL	kernel/syscalls/kernel_space.c	6;"	d	file:
 SYSCALL	kernel/syscalls/kernel_space.c	8;"	d	file:
 SYSCALLS_DEF_H	kernel/syscalls/syscalls_def.h	2;"	d
+SYSCALLS_H	kernel/syscalls/syscalls.h	2;"	d
 SYSCALLS_INTERNALS_H	kernel/syscalls/syscalls_internals.h	2;"	d
 SYSCALL_HANDLER	kernel/syscalls/sleep.c	/^SYSCALL_HANDLER(sleep)$/;"	f
 SYSCALL_HANDLER	kernel/syscalls/syscalls_def.h	6;"	d
@@ -71,9 +72,15 @@ UART0TFR	kernel/drivers/uart/qemu-arm/uart.c	/^volatile unsigned int * const UAR
 VECTOR_TABLE_H	./kernel/interrupts/vector_table.h	2;"	d
 VIC_INTENABLE	./platform/qemu-arm/init.c	16;"	d	file:
 VIC_INTENABLE	platform/qemu-arm/init.c	16;"	d	file:
-call_syscall	kernel/syscalls/kernel_space.c	/^void call_syscall(struct process_data_t *self)$/;"	f
 clear_timer	platform/qemu-arm/init.c	/^void clear_timer()$/;"	f
 context_s	kernel/proc.h	/^struct context_s {$/;"	s
+cyclic_buffer_clear	libs/CyclicBuffer/cyclic_buffer.c	/^void cyclic_buffer_clear(CYCLIC_BUFFER_t *self)$/;"	f
+cyclic_buffer_init	libs/CyclicBuffer/cyclic_buffer.c	/^void cyclic_buffer_init(CYCLIC_BUFFER_t *self, void *buffer, size_t buffer_size)$/;"	f
+cyclic_buffer_is_empty	libs/CyclicBuffer/cyclic_buffer.c	/^bool cyclic_buffer_is_empty(CYCLIC_BUFFER_t *self)$/;"	f
+cyclic_buffer_pop	libs/CyclicBuffer/cyclic_buffer.c	/^void cyclic_buffer_pop(CYCLIC_BUFFER_t *self, size_t length)$/;"	f
+cyclic_buffer_read	libs/CyclicBuffer/cyclic_buffer.c	/^size_t cyclic_buffer_read(CYCLIC_BUFFER_t *self, void *buffer_p, size_t length)$/;"	f
+cyclic_buffer_validate_enough_space	libs/CyclicBuffer/cyclic_buffer.c	/^bool cyclic_buffer_validate_enough_space(CYCLIC_BUFFER_t *self, size_t length)$/;"	f
+cyclic_buffer_write	libs/CyclicBuffer/cyclic_buffer.c	/^bool cyclic_buffer_write(CYCLIC_BUFFER_t *self, void *buffer_p, size_t length)$/;"	f
 disable_timer	platform/qemu-arm/init.c	/^void disable_timer()$/;"	f
 dispatch_process	kernel/interrupts/interrupts.s	/^dispatch_process:$/;"	l
 enable_timer	platform/qemu-arm/init.c	/^void enable_timer()$/;"	f
@@ -89,7 +96,6 @@ parameters	kernel/proc.h	/^    uint32_t parameters[];$/;"	m	struct:context_s
 pc	kernel/proc.h	/^    void (*pc)(void);$/;"	m	struct:process_data_t
 pid	kernel/proc.h	/^    process_id_t pid;$/;"	m	struct:process_data_t
 print_svc	./kernel/main.c	/^void print_svc(void)$/;"	f
-print_svc	kernel/main.c	/^void print_svc(void)$/;"	f
 print_svc_address	./kernel/interrupts/interrupts.s	/^print_svc_address: .word print_svc$/;"	l
 print_timer	./kernel/main.c	/^void print_timer(void)$/;"	f
 print_timer_address	./kernel/interrupts/interrupts.s	/^print_timer_address: .word print_timer$/;"	l
@@ -108,6 +114,9 @@ r6	kernel/proc.h	/^    uint32_t r6;$/;"	m	struct:context_s
 r7	kernel/proc.h	/^    uint32_t r7;$/;"	m	struct:context_s
 r8	kernel/proc.h	/^    uint32_t r8;$/;"	m	struct:context_s
 r9	kernel/proc.h	/^    uint32_t r9;$/;"	m	struct:context_s
+records_allocator_allocate	libs/RecordsAllocator/records_allocator.c	/^void *records_allocator_allocate(RECORDS_ALLOCATOR_t *allocator)$/;"	f
+records_allocator_free	libs/RecordsAllocator/records_allocator.c	/^void records_allocator_free(void *node_p)$/;"	f
+records_allocator_init	libs/RecordsAllocator/records_allocator.c	/^void records_allocator_init(RECORDS_ALLOCATOR_t *allocator, void *array, size_t record_size, size_t count)$/;"	f
 reserved_interrupt	./kernel/interrupts/interrupts.s	/^reserved_interrupt:$/;"	l
 reserved_interrupt	kernel/interrupts/interrupts.s	/^reserved_interrupt:$/;"	l
 reserved_interrupt_address	kernel/interrupts/vector_table.s	/^reserved_interrupt_address: .word reserved_interrupt$/;"	l
@@ -124,6 +133,7 @@ svcall_interrupt_address	kernel/interrupts/vector_table.s	/^svcall_interrupt_add
 syscall	kernel/syscall.s	/^syscall:$/;"	l
 syscall	kernel/syscalls/syscall.s	/^syscall:$/;"	l
 syscall_id	kernel/proc.h	/^    uint32_t syscall_id;$/;"	m	struct:context_s
+syscall_run	kernel/syscalls/kernel_space.c	/^void syscall_run(struct process_data_t *self)$/;"	f
 syscall_t	kernel/syscalls/syscalls_def.h	/^typedef void (*syscall_t)(struct process_data_t *);$/;"	t
 syscall_t	kernel/syscalls/syscalls_internals.h	/^typedef void syscall_t(struct process_data_t *self);$/;"	t
 syscalls_table	kernel/syscalls/kernel_space.c	/^syscall_t syscalls_table[] = {$/;"	v

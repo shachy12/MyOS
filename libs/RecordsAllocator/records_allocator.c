@@ -6,7 +6,6 @@
 void records_allocator_init(RECORDS_ALLOCATOR_t *allocator, void *array, size_t record_size, size_t count)
 {
     records_allocator_node_t *current_record = NULL;
-    records_allocator_node_t *next_record = NULL;
     memset(allocator, 0, sizeof(*allocator));
     for (uint16_t i = 0; i < count; i++) {
         current_record = (records_allocator_node_t *)((uint8_t *)(array) + (record_size * i));

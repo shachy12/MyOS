@@ -38,7 +38,6 @@ Exit:
 
 size_t cyclic_buffer_read(CYCLIC_BUFFER_t *self, void *buffer_p, size_t length)
 {
-    bool rc = false;
     size_t bytes_read = 0;
     size_t current_byte_index = 0;
     uint8_t *buffer = (uint8_t *)buffer_p;
