@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <platform/platforms.h>
-#include <kernel/drivers/uart/uart.h>
+#include <drivers/uart/uart.h>
 #include <kernel/proc.h>
 
 void print_svc(void)

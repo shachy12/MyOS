@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ARRAY_SIZE	kernel/utils.h	4;"	d
 CC	./Makefile	/^CC := $(CROSS_COMPILE)gcc$/;"	m
 CC	Makefile	/^CC := $(CROSS_COMPILE)gcc$/;"	m
 CFLAGS	./Makefile	/^CFLAGS = -O0 \\$/;"	m
@@ -21,6 +22,7 @@ INTERRUPT_HANDLER	./kernel/interrupts/vector_table.c	3;"	d	file:
 INTERRUPT_HANDLER	./kernel/interrupts/vector_table.c	5;"	d	file:
 INTERRUPT_HANDLER	./kernel/interrupts/vector_table.c	6;"	d	file:
 INTERRUPT_HANDLER	./kernel/interrupts/vector_table.c	8;"	d	file:
+KERNEL_UTILS_H	kernel/utils.h	2;"	d
 OUTPUT_DIR	./Makefile	/^OUTPUT_DIR = build$/;"	m
 OUTPUT_DIR	Makefile	/^OUTPUT_DIR = build$/;"	m
 PLATFORM	./Makefile	/^PLATFORM = qemu-arm$/;"	m
@@ -32,8 +34,10 @@ QEMU_AUDIO_DRV	./Makefile	/^	QEMU_AUDIO_DRV=none qemu-system-arm -s -M versatile
 QEMU_AUDIO_DRV	Makefile	/^	QEMU_AUDIO_DRV=none qemu-system-arm -s -M versatilepb -cpu arm1176 -serial mon:stdio -append 'console=ttyS0' -nographic -kernel $(TARGET)$/;"	m
 SYSCALL	kernel/proc.h	/^    SYSCALL,$/;"	e	enum:__anon1
 SYSCALL	kernel/syscalls/getpid.c	/^SYSCALL(getpid)$/;"	f
-SYSCALL	kernel/syscalls/kernel_space.c	5;"	d	file:
-SYSCALL	kernel/syscalls/kernel_space.c	7;"	d	file:
+SYSCALL	kernel/syscalls/kernel_space.c	11;"	d	file:
+SYSCALL	kernel/syscalls/kernel_space.c	13;"	d	file:
+SYSCALL	kernel/syscalls/kernel_space.c	6;"	d	file:
+SYSCALL	kernel/syscalls/kernel_space.c	8;"	d	file:
 SYSCALLS_DEF_H	kernel/syscalls/syscalls_def.h	2;"	d
 SYSCALLS_INTERNALS_H	kernel/syscalls/syscalls_internals.h	2;"	d
 SYSCALL_HANDLER	kernel/syscalls/sleep.c	/^SYSCALL_HANDLER(sleep)$/;"	f
@@ -120,8 +124,9 @@ svcall_interrupt_address	kernel/interrupts/vector_table.s	/^svcall_interrupt_add
 syscall	kernel/syscall.s	/^syscall:$/;"	l
 syscall	kernel/syscalls/syscall.s	/^syscall:$/;"	l
 syscall_id	kernel/proc.h	/^    uint32_t syscall_id;$/;"	m	struct:context_s
-syscall_t	kernel/syscalls/syscalls_def.h	/^typedef void (syscall_t)(struct process_data_t);$/;"	t
+syscall_t	kernel/syscalls/syscalls_def.h	/^typedef void (*syscall_t)(struct process_data_t *);$/;"	t
 syscall_t	kernel/syscalls/syscalls_internals.h	/^typedef void syscall_t(struct process_data_t *self);$/;"	t
+syscalls_table	kernel/syscalls/kernel_space.c	/^syscall_t syscalls_table[] = {$/;"	v
 timer_interrupt	./kernel/interrupts/interrupts.s	/^timer_interrupt:$/;"	l
 timer_interrupt	kernel/interrupts/interrupts.s	/^timer_interrupt:$/;"	l
 timer_interrupt_address	kernel/interrupts/vector_table.s	/^timer_interrupt_address: .word timer_interrupt$/;"	l

@@ -1,5 +1,5 @@
 #include <kernel/syscalls/syscalls_def.h>
-#include <kernel/drivers/uart/uart.h>
+#include <drivers/uart/uart.h>
 
 SYSCALL_HANDLER(sleep)
 {

@@ -9,5 +9,5 @@
 
 #define SYSCALL_SET_RETURN_VALUE(__value) ((struct context_s *)(self->sp))->parameters[0] = (uint32_t)(__value)
 
-typedef void (syscall_t)(struct process_data_t);
+typedef void (*syscall_t)(struct process_data_t *);
 #endif

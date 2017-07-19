@@ -1,29 +1,23 @@
 #include <kernel/proc.h>
+#include <kernel/utils.h>
 #include <kernel/syscalls/syscalls_def.h>
-#include <kernel/drivers/uart/uart.h>
+#include <drivers/uart/uart.h>
 
 #define SYSCALL(__name) SYSCALL_HANDLER(__name);
 #include <kernel/syscalls/syscalls_handlers.hx>
 #undef SYSCALL
 
-/* syscall_t syscalls_table[] = { */
-/*     &syscall_sleep */
-/* /1* #define SYSCALL(__name) syscall_##__name, *1/ */
-/* /1* #include <kernel/syscalls/syscalls_handlers.hx> *1/ */
-/* /1* #undef SYSCALL *1/ */
-/* }; */
+syscall_t syscalls_table[] = {
+#define SYSCALL(__name) syscall_##__name,
+#include <kernel/syscalls/syscalls_handlers.hx>
+#undef SYSCALL
+};
 
 void call_syscall(struct process_data_t *self)
 {
     struct context_s *ctx = (struct context_s *)(self->sp);
-    /* syscalls_table(ctx->syscall_id); */
-    if (ctx->syscall_id == 0) {
-        uart_print("sleep syscall\n");
-    }
-    else {
-
-        uart_print("wtf\n");
+    if (ARRAY_SIZE(syscalls_table) > ctx->syscall_id) {
+        syscalls_table[ctx->syscall_id](self);
     }
     self->parameter_index = 0;
-    /* syscall_sleep(self); */
 }
