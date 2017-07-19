@@ -13,9 +13,9 @@ syscall_t syscalls_table[] = {
 #undef SYSCALL
 };
 
-void syscall_run(struct process_data_t *self)
+void syscall_run(struct process_data *self)
 {
-    struct context_s *ctx = (struct context_s *)(self->sp);
+    struct context *ctx = (struct context *)(self->sp);
     if (ARRAY_SIZE(syscalls_table) > ctx->syscall_id) {
         syscalls_table[ctx->syscall_id](self);
     }

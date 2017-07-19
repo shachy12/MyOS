@@ -12,7 +12,7 @@ process_rc_t dispatch_process(void *process_stack);
 
 typedef uint32_t process_id_t;
 
-struct context_s {
+struct context {
     uint32_t next_value;
     uint32_t r0;
     uint32_t r1;
@@ -31,12 +31,22 @@ struct context_s {
     uint32_t parameters[];
 };
 
-struct process_data_t {
+enum process_state {
+    IDLE,
+    RUNNING,
+    WAITING,
+    TERMINATE
+};
+
+struct process_data {
     void *sp;
     void (*pc)(void);
+    enum process_state state;
     uint8_t parameter_index;
     process_id_t pid;
     uint8_t stack[0x10000];
 };
+
+void proc_init(struct process_data *proc_data, process_id_t pid, void (*proc_main)(void));
 
 #endif

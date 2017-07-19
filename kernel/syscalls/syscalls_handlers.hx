@@ -1,1 +1,2 @@
+SYSCALL(terminate)
 SYSCALL(sleep)

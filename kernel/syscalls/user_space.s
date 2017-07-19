@@ -8,6 +8,10 @@
     bx lr
 .endm
 
+.global terminate
+terminate:
+    create_syscall #0
+
 .global sleep
 sleep:
-    create_syscall #0
+    create_syscall #1

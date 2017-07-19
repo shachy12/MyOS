@@ -14,6 +14,7 @@ CROSS_COMPILE	Makefile	/^CROSS_COMPILE ?= arm-none-eabi-$/;"	m
 DRIVERS_UART_H	./kernel/drivers/uart/uart.h	2;"	d
 FILES	./Makefile	/^FILES = $(shell find . -type f -iname "*.[cs]")$/;"	m
 FILES	Makefile	/^FILES = $(shell find . -type f -iname "*.[cs]")$/;"	m
+IDLE	kernel/proc.h	/^    IDLE,$/;"	e	enum:process_state
 INTERRUPTS_VECTOR_ADDRESS	./platform/qemu-arm/init.c	6;"	d	file:
 INTERRUPTS_VECTOR_ADDRESS	platform/qemu-arm/init.c	6;"	d	file:
 INTERRUPT_CONTROLLER	./platform/qemu-arm/init.c	14;"	d	file:
@@ -32,21 +33,27 @@ PLATFORMS_H	platform/platforms.h	2;"	d
 PROC_H	kernel/proc.h	2;"	d
 QEMU_AUDIO_DRV	./Makefile	/^	QEMU_AUDIO_DRV=none qemu-system-arm -s -M versatilepb -cpu arm1176 -serial mon:stdio -append 'console=ttyS0' -nographic -kernel $(TARGET)$/;"	m
 QEMU_AUDIO_DRV	Makefile	/^	QEMU_AUDIO_DRV=none qemu-system-arm -s -M versatilepb -cpu arm1176 -serial mon:stdio -append 'console=ttyS0' -nographic -kernel $(TARGET)$/;"	m
+RUNNING	kernel/proc.h	/^    RUNNING,$/;"	e	enum:process_state
 SYSCALL	kernel/proc.h	/^    SYSCALL,$/;"	e	enum:__anon1
 SYSCALL	kernel/syscalls/getpid.c	/^SYSCALL(getpid)$/;"	f
 SYSCALL	kernel/syscalls/kernel_space.c	11;"	d	file:
 SYSCALL	kernel/syscalls/kernel_space.c	13;"	d	file:
 SYSCALL	kernel/syscalls/kernel_space.c	6;"	d	file:
 SYSCALL	kernel/syscalls/kernel_space.c	8;"	d	file:
+SYSCALL	kernel/syscalls/syscalls.c	12;"	d	file:
+SYSCALL	kernel/syscalls/syscalls.c	3;"	d	file:
 SYSCALLS_DEF_H	kernel/syscalls/syscalls_def.h	2;"	d
 SYSCALLS_H	kernel/syscalls/syscalls.h	2;"	d
 SYSCALLS_INTERNALS_H	kernel/syscalls/syscalls_internals.h	2;"	d
+SYSCALLS_USER_SPACE_H	kernel/syscalls/user_space.h	2;"	d
+SYSCALL_HANDLER	kernel/syscalls/exit.c	/^SYSCALL_HANDLER(terminate)$/;"	f
 SYSCALL_HANDLER	kernel/syscalls/sleep.c	/^SYSCALL_HANDLER(sleep)$/;"	f
 SYSCALL_HANDLER	kernel/syscalls/syscalls_def.h	6;"	d
 SYSCALL_PARAMETER_VALUE	kernel/syscalls/syscalls_def.h	8;"	d
 SYSCALL_SET_RETURN_VALUE	kernel/syscalls/syscalls_def.h	10;"	d
 TARGET	./Makefile	/^TARGET = $(OUTPUT_DIR)\/os.bin$/;"	m
 TARGET	Makefile	/^TARGET = $(OUTPUT_DIR)\/os.bin$/;"	m
+TERMINATE	kernel/proc.h	/^    TERMINATE$/;"	e	enum:process_state
 TIMER	kernel/proc.h	/^    TIMER$/;"	e	enum:__anon1
 TIMER0	./platform/qemu-arm/init.c	7;"	d	file:
 TIMER0	platform/qemu-arm/init.c	7;"	d	file:
@@ -72,8 +79,9 @@ UART0TFR	kernel/drivers/uart/qemu-arm/uart.c	/^volatile unsigned int * const UAR
 VECTOR_TABLE_H	./kernel/interrupts/vector_table.h	2;"	d
 VIC_INTENABLE	./platform/qemu-arm/init.c	16;"	d	file:
 VIC_INTENABLE	platform/qemu-arm/init.c	16;"	d	file:
+WAITING	kernel/proc.h	/^    WAITING,$/;"	e	enum:process_state
 clear_timer	platform/qemu-arm/init.c	/^void clear_timer()$/;"	f
-context_s	kernel/proc.h	/^struct context_s {$/;"	s
+context	kernel/proc.h	/^struct context {$/;"	s
 cyclic_buffer_clear	libs/CyclicBuffer/cyclic_buffer.c	/^void cyclic_buffer_clear(CYCLIC_BUFFER_t *self)$/;"	f
 cyclic_buffer_init	libs/CyclicBuffer/cyclic_buffer.c	/^void cyclic_buffer_init(CYCLIC_BUFFER_t *self, void *buffer, size_t buffer_size)$/;"	f
 cyclic_buffer_is_empty	libs/CyclicBuffer/cyclic_buffer.c	/^bool cyclic_buffer_is_empty(CYCLIC_BUFFER_t *self)$/;"	f
@@ -86,34 +94,36 @@ dispatch_process	kernel/interrupts/interrupts.s	/^dispatch_process:$/;"	l
 enable_timer	platform/qemu-arm/init.c	/^void enable_timer()$/;"	f
 init_platform	./platform/qemu-arm/init.c	/^void init_platform()$/;"	f
 init_platform	platform/qemu-arm/init.c	/^void init_platform()$/;"	f
-init_process	kernel/main.c	/^void init_process(struct process_data_t *proc_data, process_id_t pid, void (*proc_main)(void))$/;"	f
 kmain	./kernel/main.c	/^void kmain()$/;"	f
 kmain	kernel/main.c	/^void kmain()$/;"	f
-lr	kernel/proc.h	/^    void (*lr)(void);$/;"	m	struct:context_s
-next_value	kernel/proc.h	/^    uint32_t next_value;$/;"	m	struct:context_s
-parameter_index	kernel/proc.h	/^    uint8_t parameter_index;$/;"	m	struct:process_data_t
-parameters	kernel/proc.h	/^    uint32_t parameters[];$/;"	m	struct:context_s
-pc	kernel/proc.h	/^    void (*pc)(void);$/;"	m	struct:process_data_t
-pid	kernel/proc.h	/^    process_id_t pid;$/;"	m	struct:process_data_t
+lr	kernel/proc.h	/^    void (*lr)(void);$/;"	m	struct:context
+next_value	kernel/proc.h	/^    uint32_t next_value;$/;"	m	struct:context
+parameter_index	kernel/proc.h	/^    uint8_t parameter_index;$/;"	m	struct:process_data
+parameters	kernel/proc.h	/^    uint32_t parameters[];$/;"	m	struct:context
+pc	kernel/proc.h	/^    void (*pc)(void);$/;"	m	struct:process_data
+pid	kernel/proc.h	/^    process_id_t pid;$/;"	m	struct:process_data
 print_svc	./kernel/main.c	/^void print_svc(void)$/;"	f
 print_svc_address	./kernel/interrupts/interrupts.s	/^print_svc_address: .word print_svc$/;"	l
 print_timer	./kernel/main.c	/^void print_timer(void)$/;"	f
 print_timer_address	./kernel/interrupts/interrupts.s	/^print_timer_address: .word print_timer$/;"	l
-process_data_t	kernel/proc.h	/^struct process_data_t {$/;"	s
+proc_init	kernel/proc.c	/^void proc_init(struct process_data *proc_data, process_id_t pid, void (*proc_main)(void))$/;"	f
+proc_init	proc.c	/^void proc_init(struct process_data *proc_data, process_id_t pid, void (*proc_main)(void))$/;"	f
+process_data	kernel/proc.h	/^struct process_data {$/;"	s
 process_id_t	kernel/proc.h	/^typedef uint32_t process_id_t;$/;"	t
 process_rc_t	kernel/proc.h	/^} process_rc_t;$/;"	t	typeref:enum:__anon1
-r0	kernel/proc.h	/^    uint32_t r0;$/;"	m	struct:context_s
-r1	kernel/proc.h	/^    uint32_t r1;$/;"	m	struct:context_s
-r10	kernel/proc.h	/^    uint32_t r10;$/;"	m	struct:context_s
-r11	kernel/proc.h	/^    uint32_t r11;$/;"	m	struct:context_s
-r2	kernel/proc.h	/^    uint32_t r2;$/;"	m	struct:context_s
-r3	kernel/proc.h	/^    uint32_t r3;$/;"	m	struct:context_s
-r4	kernel/proc.h	/^    uint32_t r4;$/;"	m	struct:context_s
-r5	kernel/proc.h	/^    uint32_t r5;$/;"	m	struct:context_s
-r6	kernel/proc.h	/^    uint32_t r6;$/;"	m	struct:context_s
-r7	kernel/proc.h	/^    uint32_t r7;$/;"	m	struct:context_s
-r8	kernel/proc.h	/^    uint32_t r8;$/;"	m	struct:context_s
-r9	kernel/proc.h	/^    uint32_t r9;$/;"	m	struct:context_s
+process_state	kernel/proc.h	/^enum process_state {$/;"	g
+r0	kernel/proc.h	/^    uint32_t r0;$/;"	m	struct:context
+r1	kernel/proc.h	/^    uint32_t r1;$/;"	m	struct:context
+r10	kernel/proc.h	/^    uint32_t r10;$/;"	m	struct:context
+r11	kernel/proc.h	/^    uint32_t r11;$/;"	m	struct:context
+r2	kernel/proc.h	/^    uint32_t r2;$/;"	m	struct:context
+r3	kernel/proc.h	/^    uint32_t r3;$/;"	m	struct:context
+r4	kernel/proc.h	/^    uint32_t r4;$/;"	m	struct:context
+r5	kernel/proc.h	/^    uint32_t r5;$/;"	m	struct:context
+r6	kernel/proc.h	/^    uint32_t r6;$/;"	m	struct:context
+r7	kernel/proc.h	/^    uint32_t r7;$/;"	m	struct:context
+r8	kernel/proc.h	/^    uint32_t r8;$/;"	m	struct:context
+r9	kernel/proc.h	/^    uint32_t r9;$/;"	m	struct:context
 records_allocator_allocate	libs/RecordsAllocator/records_allocator.c	/^void *records_allocator_allocate(RECORDS_ALLOCATOR_t *allocator)$/;"	f
 records_allocator_free	libs/RecordsAllocator/records_allocator.c	/^void records_allocator_free(void *node_p)$/;"	f
 records_allocator_init	libs/RecordsAllocator/records_allocator.c	/^void records_allocator_init(RECORDS_ALLOCATOR_t *allocator, void *array, size_t record_size, size_t count)$/;"	f
@@ -125,18 +135,20 @@ reset_interrupt_address	kernel/interrupts/vector_table.s	/^reset_interrupt_addre
 set_timer	./platform/qemu-arm/init.c	/^void set_timer(uint32_t millis)$/;"	f
 set_timer	platform/qemu-arm/init.c	/^void set_timer(uint32_t millis)$/;"	f
 sleep	kernel/syscalls/user_space.s	/^sleep:$/;"	l
-sp	kernel/proc.h	/^    void *sp;$/;"	m	struct:process_data_t
-stack	kernel/proc.h	/^    uint8_t stack[0x10000];$/;"	m	struct:process_data_t
+sp	kernel/proc.h	/^    void *sp;$/;"	m	struct:process_data
+stack	kernel/proc.h	/^    uint8_t stack[0x10000];$/;"	m	struct:process_data
+state	kernel/proc.h	/^    enum process_state state;$/;"	m	struct:process_data	typeref:enum:process_data::process_state
 svcall_interrupt	./kernel/interrupts/interrupts.s	/^svcall_interrupt:$/;"	l
 svcall_interrupt	kernel/interrupts/interrupts.s	/^svcall_interrupt:$/;"	l
 svcall_interrupt_address	kernel/interrupts/vector_table.s	/^svcall_interrupt_address: .word svcall_interrupt$/;"	l
 syscall	kernel/syscall.s	/^syscall:$/;"	l
 syscall	kernel/syscalls/syscall.s	/^syscall:$/;"	l
-syscall_id	kernel/proc.h	/^    uint32_t syscall_id;$/;"	m	struct:context_s
-syscall_run	kernel/syscalls/kernel_space.c	/^void syscall_run(struct process_data_t *self)$/;"	f
-syscall_t	kernel/syscalls/syscalls_def.h	/^typedef void (*syscall_t)(struct process_data_t *);$/;"	t
+syscall_id	kernel/proc.h	/^    uint32_t syscall_id;$/;"	m	struct:context
+syscall_run	kernel/syscalls/kernel_space.c	/^void syscall_run(struct process_data *self)$/;"	f
+syscall_t	kernel/syscalls/syscalls_def.h	/^typedef void (*syscall_t)(struct process_data *);$/;"	t
 syscall_t	kernel/syscalls/syscalls_internals.h	/^typedef void syscall_t(struct process_data_t *self);$/;"	t
 syscalls_table	kernel/syscalls/kernel_space.c	/^syscall_t syscalls_table[] = {$/;"	v
+terminate	kernel/syscalls/user_space.s	/^terminate:$/;"	l
 timer_interrupt	./kernel/interrupts/interrupts.s	/^timer_interrupt:$/;"	l
 timer_interrupt	kernel/interrupts/interrupts.s	/^timer_interrupt:$/;"	l
 timer_interrupt_address	kernel/interrupts/vector_table.s	/^timer_interrupt_address: .word timer_interrupt$/;"	l
@@ -148,6 +160,6 @@ uart_putc	./kernel/drivers/uart/qemu-arm/uart.c	/^void uart_putc(const char c)$/
 uart_putc	kernel/drivers/uart/qemu-arm/uart.c	/^void uart_putc(const char c)$/;"	f
 user_space1	kernel/main.c	/^void user_space1(void)$/;"	f
 user_space2	kernel/main.c	/^void user_space2(void)$/;"	f
-user_space_proc	kernel/main.c	/^struct process_data_t user_space_proc[2];$/;"	v	typeref:struct:process_data_t
+user_space_proc	kernel/main.c	/^struct process_data user_space_proc[2];$/;"	v	typeref:struct:process_data
 vector_table_end	kernel/interrupts/vector_table.s	/^vector_table_end:$/;"	l
 vector_table_start	kernel/interrupts/vector_table.s	/^vector_table_start:$/;"	l
